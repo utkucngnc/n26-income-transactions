@@ -1,10 +1,8 @@
 from utils import *
 
-path = "C:/Users/Utku/Downloads/n26-csv-transactions.csv"
-payee = "Landeshauptkasse Nordrhein-Westfalen fuer LBV"
+df = LoadCSV(config["load_path"])
+df = ByPayee(df, config["payee"])
 
-df = LoadCSV(path)
-df = ByPayee(df, payee)
-columns = ["Date", "Payee", "Amount (EUR)"]
+SaveCSV(FilterColumns(df=df, columns=config["columns"]), config["save_path"])
 
-#SaveCSV(FilterColumns(df=df, columns=columns), "C:/Users/Utku/Downloads/n26-csv-transactions-filtered.csv")
+CheckDF(config["save_path"])
